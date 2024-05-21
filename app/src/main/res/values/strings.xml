@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Pen Pal</string>
+    <string name="error_invalid_email">Hmm, Not look like an email. Try again!</string>
+    <string name="error_insecure_password">"Your Password Needs More Spice! "</string>
 </resources>
