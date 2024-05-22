@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Pen Pal</string>
     <string name="hello_blank_fragment">Hello Blank Fragment</string>
-    <string name="error_invalid_email">Ups its not an email</string>
+    <string name="error_invalid_email">I\'m sure it wasn\'t an email</string>
     <string name="error_insecure_password">Your Password Needs More Spice!</string>
+    <string name="help_add_story">add story</string>
 </resources>

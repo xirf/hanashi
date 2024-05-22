@@ -25,6 +25,10 @@ android {
                 "proguard-rules.pro"
             )
         }
+
+        defaultConfig {
+            buildConfigField("String", "API_URL", "\"https://story-api.dicoding.dev/v1\"")
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -35,6 +39,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -48,4 +53,34 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Layout
+    implementation(libs.glide)
+    implementation(libs.androidx.paging.runtime.ktx)
+    implementation(libs.androidx.swiperefreshlayout)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
+
+    // Room
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.paging)
+
+    // CameraX
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
+
+    // Jetpack
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.preference.ktx)
+    implementation(libs.androidx.lifecycle.extensions)
+    implementation(libs.androidx.datastore.preferences)
+
 }
