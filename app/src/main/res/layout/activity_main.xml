@@ -18,8 +18,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.andka.penpal.ui.customview.EmailEditText
+    <com.andka.penpal.ui.customview.MatchPatternEditText
         android:layout_width="match_parent"
-        android:hint="email"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:hint="email" />
+
+    <com.andka.penpal.ui.customview.MatchPatternEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="password"
+        android:inputType="textPassword" />
+
 </LinearLayout>
