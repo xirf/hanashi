@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".ui.activity.MainActivity">
+    tools:context=".ui.main.MainActivity">
 
     <com.andka.penpal.ui.customview.CleanableEditText
         android:layout_width="match_parent"
@@ -27,6 +27,7 @@
     <com.andka.penpal.ui.customview.MatchPatternEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true"
         android:hint="password"
         android:inputType="textPassword" />
 

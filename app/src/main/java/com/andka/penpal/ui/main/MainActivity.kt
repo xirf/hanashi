@@ -1,4 +1,4 @@
-package com.andka.penpal.ui.activity
+package com.andka.penpal.ui.main
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
