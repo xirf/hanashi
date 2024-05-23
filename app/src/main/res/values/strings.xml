@@ -1,7 +1,20 @@
 <resources>
     <string name="app_name">Pen Pal</string>
     <string name="hello_blank_fragment">Hello Blank Fragment</string>
-    <string name="error_invalid_email">I\'m sure it wasn\'t an email</string>
-    <string name="error_insecure_password">Your Password Needs More Spice!</string>
+    <string name="error_invalid_email">The email address you entered is not valid. Please try again.</string>
+    <string name="error_insecure_password">Password is too short. Please enter at least 8 characters.</string>
     <string name="help_add_story">add story</string>
+    <string name="help_login_image">Person reading a book</string>
+    <string name="welcome_description">Dive into Captivating Stories\nPersonalized for You</string>
+    <string name="welcome_subheadline">Get lost in captivating worlds, crafted by talented authors. Millions of reads to discover, with new stories added daily</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="help_password">Password</string>
+    <string name="help_email">Email</string>
+    <string name="login_subheadline">Let\'s get things ready</string>
+    <string name="no_account">Don\'t have accout?</string>
+    <string name="register_headline">Let\'s Begin</string>
+    <string name="register_subheadline">First let\'s get know and then make your account here.</string>
+    <string name="have_account">Already have an account?</string>
 </resources>

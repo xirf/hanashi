@@ -1,48 +1,47 @@
 package com.andka.penpal.ui.auth
 
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
+import android.text.method.TransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.andka.penpal.R
+import com.andka.penpal.databinding.FragmentLoginBinding
+import com.andka.penpal.utils.UserPreferences
+import com.andka.penpal.utils.datastore
+import com.andka.penpal.viewmodels.UserViewModel
+import com.andka.penpal.viewmodels.factory.UserViewModelFactory
+import com.bumptech.glide.load.Transformation
 
-/**
- * A simple [Fragment] subclass.
- * Use the [LoginFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class LoginFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
+    private lateinit var binding: FragmentLoginBinding
+    private lateinit var userPreferences: UserPreferences
+    private lateinit var userViewModel: UserViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+    ): View {
+        binding = FragmentLoginBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        userPreferences = UserPreferences.getInstance((activity as AuthActivity).datastore)
+        userViewModel = ViewModelProvider(
+            this,
+            UserViewModelFactory(userPreferences)
+        )[UserViewModel::class.java]
+
+        binding.edLoginPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LoginFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LoginFragment().apply {
-
-            }
+        fun newInstance() = LoginFragment()
     }
 }
