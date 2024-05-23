@@ -57,8 +57,12 @@ class CleanableEditText @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        hint = "Masukkan nama Anda"
-        textAlignment = View.TEXT_ALIGNMENT_VIEW_START
+        context.apply {
+            background = ContextCompat.getDrawable(this, R.drawable.rounded_background)
+            setTextColor(ContextCompat.getColor(this, R.color.black))
+            setHintTextColor(ContextCompat.getColor(this, R.color.primary_200))
+        }
+        maxLines = 1
     }
 
     private fun showClearButton() {
