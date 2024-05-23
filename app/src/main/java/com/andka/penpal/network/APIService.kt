@@ -1,6 +1,7 @@
 package com.andka.penpal.network
 
 import com.andka.penpal.domain.GetAllStoryResponse
+import com.andka.penpal.domain.LoginResponse
 import com.andka.penpal.domain.NewStoryResponse
 import com.andka.penpal.domain.RegisterResponse
 import com.andka.penpal.domain.StoryDetailResponse
@@ -30,7 +31,7 @@ interface APIService {
     fun login(
         @Field("email") email: String,
         @Field("password") password: String
-    ): Call<RegisterResponse>
+    ): Call<LoginResponse>
 
     @GET("stories")
     suspend fun getStories(

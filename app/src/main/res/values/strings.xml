@@ -16,4 +16,10 @@
     <string name="register_headline">Let\'s Begin</string>
     <string name="register_subheadline">First let\'s get know and then make your account here.</string>
     <string name="welcome_back">Welcome Back!</string>
+    <string name="register_success">Welcome to the club!, Let\'s Login to continue</string>
+    <string name="register_failed">Ups, look like we had a problem, let\'s try again</string>
+    <string name="empty_field">Hmmm... you forgot this, aren\'t you?</string>
+    <string name="_success">Yay, welcome to the club!!!</string>
+    <string name="login_failed">Ouch, this is strange let\'s try again</string>
+    <string name="login_success">Yay, Welcome to the club!!!</string>
 </resources>

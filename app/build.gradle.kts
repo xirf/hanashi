@@ -27,7 +27,7 @@ android {
         }
 
         defaultConfig {
-            buildConfigField("String", "API_URL", "\"https://story-api.dicoding.dev/v1\"")
+            buildConfigField("String", "API_URL", "\"https://story-api.dicoding.dev/v1/\"")
         }
     }
     compileOptions {
