@@ -8,4 +8,11 @@
     <style name="Theme.PenPal" parent="Base.Theme.PenPal">
         <item name="android:windowBackground">@color/neutral</item>
     </style>
+
+    <style name="Theme.CustomSplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/primary</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_foreground</item>
+        <item name="windowSplashScreenAnimationDuration">500</item>
+        <item name="postSplashScreenTheme">@style/Theme.PenPal</item>
+    </style>
 </resources>

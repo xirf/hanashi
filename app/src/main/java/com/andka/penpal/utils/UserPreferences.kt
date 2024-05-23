@@ -8,7 +8,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.map
 
-val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user_preferences")
+val Context.datastore: DataStore<Preferences> by preferencesDataStore(name = "user_preferences")
 
 class UserPreferences private constructor(private val dataStore: DataStore<Preferences>) {
 
@@ -19,7 +19,6 @@ class UserPreferences private constructor(private val dataStore: DataStore<Prefe
 
 
     private val defaultValue = Constant.DEFAULT_VALUE
-    private val defaultDate = Constant.DEFAULT_DATE
 
     fun getUserToken() = dataStore.data.map { pref -> pref[userToken] ?: defaultValue }
     fun getUserId() = dataStore.data.map { pref -> pref[userId] ?: defaultValue }
