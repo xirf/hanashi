@@ -68,9 +68,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun setClickListener() {
         with(binding) {
-            fab.setOnClickListener {
-                //TODO: Add click listener
-            }
+//            fab.setOnClickListener {
+//                //TODO: Add click listener
+//            }
         }
     }
 

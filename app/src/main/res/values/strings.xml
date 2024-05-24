@@ -27,4 +27,8 @@
     <string name="text_minutes_ago">minute ago</string>
     <string name="text_hours_ago">hour ago</string>
     <string name="text_days_ago">days ago</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_add_story">Add Story</string>
+    <string name="menu_home">home</string>
+    <string name="menu_blank">not a menu</string>
 </resources>
