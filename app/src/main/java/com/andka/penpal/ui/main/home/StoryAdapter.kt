@@ -26,6 +26,7 @@ class StoryAdapter : RecyclerView.Adapter<StoryAdapter.ListViewHolder>() {
                 Glide.with(itemView.context)
                     .load(user.photoUrl)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(R.drawable.image_placeholder)
                     .into(photo)
                 description.text = user.description
                 createdAt.text = getTimelineUpload(itemView.context, user.createdAt)
