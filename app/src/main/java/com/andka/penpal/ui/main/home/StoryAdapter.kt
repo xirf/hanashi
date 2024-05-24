@@ -1,14 +1,18 @@
 package com.andka.penpal.ui.main.home
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.andka.penpal.R
 import com.andka.penpal.databinding.StoryItemBinding
 import com.andka.penpal.domain.ListStoryItem
-import com.andka.penpal.utils.getDateString
+import com.andka.penpal.utils.getTimelineUpload
 import com.bumptech.glide.Glide
+import com.bumptech.glide.GlideBuilder
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 class StoryAdapter : RecyclerView.Adapter<StoryAdapter.ListViewHolder>() {
     private val listStory = ArrayList<ListStoryItem>()
@@ -21,9 +25,10 @@ class StoryAdapter : RecyclerView.Adapter<StoryAdapter.ListViewHolder>() {
                 title.text = user.name
                 Glide.with(itemView.context)
                     .load(user.photoUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(photo)
                 description.text = user.description
-                createdAt.text = user.createdAt
+                createdAt.text = getTimelineUpload(itemView.context, user.createdAt)
             }
         }
     }
