@@ -31,7 +31,7 @@ class AuthViewModel : ViewModel() {
     // Simplify API call with a generic function
     private fun <T> makeApiCall(call: Call<T>, onSuccess: (T?) -> Unit) {
         isLoading.postValue(true)
-        errorContent.value = null // Clear error stack
+        errorContent.postValue(null)
         call.enqueue(object : Callback<T> {
             override fun onResponse(call: Call<T>, response: Response<T>) {
                 if (response.isSuccessful) {

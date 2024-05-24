@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.transition.Transition
 import androidx.transition.TransitionInflater
 import com.andka.penpal.R
@@ -23,13 +24,14 @@ import com.andka.penpal.utils.validateField
 import com.andka.penpal.viewmodels.AuthViewModel
 import com.andka.penpal.viewmodels.UserViewModel
 import com.andka.penpal.viewmodels.factory.UserViewModelFactory
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var userPreferences: UserPreferences
     private lateinit var userViewModel: UserViewModel
     private val viewModel by lazy { ViewModelProvider(this)[AuthViewModel::class.java] }
-
+    private var email: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val transition = TransitionInflater
@@ -65,21 +67,47 @@ class LoginFragment : Fragment() {
             edLoginPassword.transformationMethod = PasswordTransformationMethod.getInstance()
             btnRegister.setOnClickListener { goToRegister() }
             btnLogin.setOnClickListener {
-                if(!validateField(edLoginEmail, getString(R.string.empty_field))) return@setOnClickListener
-                if(!validateField(edLoginPassword, getString(R.string.empty_field))) return@setOnClickListener
-                if((edLoginPassword.error?.length ?: 0) > 0) return@setOnClickListener
-
-                viewModel.doLogin(edLoginEmail.text.toString(), edLoginPassword.text.toString())
+                if (!validateField(
+                        edLoginEmail,
+                        getString(R.string.empty_field)
+                    )
+                ) return@setOnClickListener
+                if (!validateField(
+                        edLoginPassword,
+                        getString(R.string.empty_field)
+                    )
+                ) return@setOnClickListener
+                if ((edLoginPassword.error?.length ?: 0) > 0) return@setOnClickListener
+                email = edLoginEmail.text.toString()
+                viewModel.doLogin(email!!, edLoginPassword.text.toString())
             }
         }
 
         listenToRegisterResult()
         checkLoading()
+        checkError()
+    }
+
+    private fun checkError() {
+        viewModel.errorContent.observe(viewLifecycleOwner) { error ->
+            if (error != null) {
+                Log.d("LoginFragment", "Error: $error")
+                showToast(requireContext(), error)
+            }
+        }
     }
 
     private fun listenToRegisterResult() {
         viewModel.loginResponse.observe(viewLifecycleOwner) { response ->
-            if (response?.error == null) {
+            if (response?.error == false) {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    userPreferences.setSession(
+                        token = response.loginResult?.token!!,
+                        userId = response.loginResult.userId!!,
+                        userName = response.loginResult.name!!,
+                        userEmail = email!!
+                    )
+                }
                 showToast(requireContext(), getString(R.string.login_success))
                 goToMainActivity()
             } else {

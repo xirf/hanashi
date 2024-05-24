@@ -4,6 +4,7 @@ import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -88,6 +89,16 @@ class RegisterFragment : Fragment() {
 
         listenToRegisterResult()
         checkLoading()
+        checkError()
+    }
+
+    private fun checkError() {
+        viewModel.errorContent.observe(viewLifecycleOwner) { error ->
+            if (error != null) {
+                Log.d("LoginFragment", "Error: $error")
+                showToast(requireContext(), error)
+            }
+        }
     }
 
     private fun listenToRegisterResult() {
