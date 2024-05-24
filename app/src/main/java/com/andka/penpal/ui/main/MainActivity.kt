@@ -4,8 +4,8 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.view.ViewTreeObserver
 import android.view.ViewTreeObserver.OnPreDrawListener
 import android.view.animation.AnticipateInterpolator
 import androidx.activity.enableEdgeToEdge
@@ -13,19 +13,19 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.datastore.dataStore
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.andka.penpal.R
 import com.andka.penpal.databinding.ActivityMainBinding
 import com.andka.penpal.ui.auth.AuthActivity
+import com.andka.penpal.ui.main.home.HomeFragment
 import com.andka.penpal.utils.Constant
 import com.andka.penpal.utils.UserPreferences
 import com.andka.penpal.utils.datastore
+import com.andka.penpal.utils.getHourPass
+import com.andka.penpal.utils.parseDate
 import com.andka.penpal.viewmodels.UserViewModel
 import com.andka.penpal.viewmodels.factory.UserViewModelFactory
-import java.util.Timer
 
 @RequiresApi(Build.VERSION_CODES.S)
 class MainActivity : AppCompatActivity() {
@@ -43,24 +43,55 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         enableEdgeToEdge()
 
-        checkUserPreferences()
-        setupSplashScreen()
-    }
-
-    private fun checkUserPreferences() {
         userPreferences = UserPreferences.getInstance(datastore)
         userViewModel = ViewModelProvider(
             this,
             UserViewModelFactory(userPreferences)
         )[UserViewModel::class.java]
 
-        userViewModel.getUserPreferences(Constant.PreferenceProperty.USER_TOKEN.name)
-            .observe(this@MainActivity) { token ->
-                isLogin = token != Constant.DEFAULT_VALUE
+        checkUserPreferences()
+        setClickListener()
+        setupSplashScreen()
+    }
+
+    private fun renderFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .setCustomAnimations(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
+            .commit()
+    }
+
+    private fun setClickListener() {
+        with(binding) {
+            fab.setOnClickListener {
+                //TODO: Add click listener
+            }
+        }
+    }
+
+    private fun checkUserPreferences() {
+        userViewModel.getUserPreferences(Constant.PreferenceProperty.USER_LAST_LOGIN.name)
+            .observe(this@MainActivity) { lastLoginDate ->
+                val lastLogin = parseDate(lastLoginDate)
+                var hourDiff: Long = 0
+                if (lastLogin != null) {
+                    hourDiff = getHourPass(lastLogin)
+                    isLogin = hourDiff < 1
+                } else {
+                    isLogin = false
+                }
+
                 if (isLogin == false) {
                     val intent = Intent(this, AuthActivity::class.java)
                     startActivity(intent)
                     finish()
+                } else {
+                    renderFragment(HomeFragment())
                 }
             }
     }

@@ -5,7 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.andka.penpal.database.dao.StoryDao
-import com.andka.penpal.database.dao.StoryRemoteKeyDao
 import com.andka.penpal.database.entity.StoryEntity
 
 @Database(
@@ -15,8 +14,6 @@ import com.andka.penpal.database.entity.StoryEntity
 )
 abstract class StoryDatabase : RoomDatabase() {
     abstract fun storyDao(): StoryDao
-    abstract fun storyRemoteKeyDao(): StoryRemoteKeyDao
-
     companion object {
         @Volatile
         private var INSTANCE: StoryDatabase? = null

@@ -36,8 +36,8 @@ interface APIService {
     @GET("stories")
     suspend fun getStories(
         @Header("Authorization") token: String,
-        @Query("page") page: Int,
-        @Query("limit") limit: Int
+        @Query("page") page: Int?,
+        @Query("limit") limit: Int?
     ): GetAllStoryResponse
 
     @GET("stories/{id}")

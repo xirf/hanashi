@@ -1,18 +1,14 @@
 package com.andka.penpal.ui.auth
 
 import android.graphics.Rect
-import android.os.Build
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.transition.Fade
 import androidx.transition.Transition
 import androidx.transition.TransitionInflater
 import com.andka.penpal.R
@@ -136,8 +132,10 @@ class RegisterFragment : Fragment() {
             addSharedElement(binding.subHeadline, "subHeadline")
             addSharedElement(binding.btnContainer, "btnContainer")
             setCustomAnimations(
-                R.anim.slide_right,
-                R.anim.slide_left,
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
             )
             replace(R.id.main, LoginFragment(), LoginFragment::class.java.simpleName)
             addToBackStack(null)

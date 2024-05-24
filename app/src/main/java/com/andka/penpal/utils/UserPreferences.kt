@@ -16,14 +16,17 @@ class UserPreferences private constructor(private val dataStore: DataStore<Prefe
     private val userId = stringPreferencesKey(Constant.PreferenceProperty.USER_ID.name)
     private val userName = stringPreferencesKey(Constant.PreferenceProperty.USER_NAME.name)
     private val userEmail = stringPreferencesKey(Constant.PreferenceProperty.USER_EMAIL.name)
-
+    private val userLastLogin =
+        stringPreferencesKey(Constant.PreferenceProperty.USER_LAST_LOGIN.name)
 
     private val defaultValue = Constant.DEFAULT_VALUE
+    private val dateDefaultValue = Constant.DATE_DEFAULT_VALUE
 
     fun getUserToken() = dataStore.data.map { pref -> pref[userToken] ?: defaultValue }
     fun getUserId() = dataStore.data.map { pref -> pref[userId] ?: defaultValue }
     fun getUserName() = dataStore.data.map { pref -> pref[userName] ?: defaultValue }
     fun getUserEmail() = dataStore.data.map { pref -> pref[userEmail] ?: defaultValue }
+    fun getUserLastLogin() = dataStore.data.map { pref -> pref[userLastLogin] ?: dateDefaultValue }
 
     suspend fun setSession(
         token: String,
@@ -35,7 +38,8 @@ class UserPreferences private constructor(private val dataStore: DataStore<Prefe
             preferences[this.userId] = userId
             preferences[this.userName] = userName
             preferences[this.userEmail] = userEmail
-            preferences[this.userToken] = token
+            preferences[this.userToken] = "Bearer $token"
+            preferences[this.userLastLogin] = getCurrentDateString()
         }
     }
 

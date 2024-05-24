@@ -15,12 +15,9 @@ class UserViewModel(
         return when (property) {
             Constant.PreferenceProperty.USER_ID.name -> userPreferences.getUserId().asLiveData()
             Constant.PreferenceProperty.USER_NAME.name -> userPreferences.getUserName().asLiveData()
-            Constant.PreferenceProperty.USER_EMAIL.name -> userPreferences.getUserEmail()
-                .asLiveData()
-
-            Constant.PreferenceProperty.USER_TOKEN.name -> userPreferences.getUserToken()
-                .asLiveData()
-
+            Constant.PreferenceProperty.USER_EMAIL.name -> userPreferences.getUserEmail().asLiveData()
+            Constant.PreferenceProperty.USER_TOKEN.name -> userPreferences.getUserToken().asLiveData()
+            Constant.PreferenceProperty.USER_LAST_LOGIN.name -> userPreferences.getUserLastLogin().asLiveData()
             else -> throw IllegalArgumentException("Invalid property name")
         }
     }

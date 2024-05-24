@@ -54,11 +54,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.androidx.core.splashscreen)
-
-    // Layout
     implementation(libs.glide)
-    implementation(libs.androidx.paging.runtime.ktx)
-    implementation(libs.androidx.swiperefreshlayout)
+
 
     // Retrofit
     implementation(libs.retrofit)
@@ -68,7 +65,6 @@ dependencies {
     // Room
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.common)
-    implementation(libs.androidx.room.paging)
 
     // CameraX
     implementation(libs.androidx.camera.camera2)

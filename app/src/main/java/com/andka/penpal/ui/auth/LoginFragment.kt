@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.transition.Transition
 import androidx.transition.TransitionInflater
 import com.andka.penpal.R
@@ -24,7 +23,6 @@ import com.andka.penpal.utils.validateField
 import com.andka.penpal.viewmodels.AuthViewModel
 import com.andka.penpal.viewmodels.UserViewModel
 import com.andka.penpal.viewmodels.factory.UserViewModelFactory
-import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
@@ -100,14 +98,12 @@ class LoginFragment : Fragment() {
     private fun listenToRegisterResult() {
         viewModel.loginResponse.observe(viewLifecycleOwner) { response ->
             if (response?.error == false) {
-                viewLifecycleOwner.lifecycleScope.launch {
-                    userPreferences.setSession(
-                        token = response.loginResult?.token!!,
-                        userId = response.loginResult.userId!!,
-                        userName = response.loginResult.name!!,
-                        userEmail = email!!
-                    )
-                }
+                userViewModel.setUserPreferences(
+                    token = response.loginResult?.token!!,
+                    userId = response.loginResult.userId!!,
+                    userName = response.loginResult.name!!,
+                    userEmail = email!!
+                )
                 showToast(requireContext(), getString(R.string.login_success))
                 goToMainActivity()
             } else {
@@ -139,8 +135,10 @@ class LoginFragment : Fragment() {
             addSharedElement(binding.subHeadline, "subHeadline")
             addSharedElement(binding.btnContainer, "btnContainer")
             setCustomAnimations(
-                R.anim.slide_right,
-                R.anim.slide_left,
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
             )
             replace(R.id.main, RegisterFragment(), RegisterFragment::class.java.simpleName)
             addToBackStack(null)

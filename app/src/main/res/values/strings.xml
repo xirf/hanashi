@@ -22,4 +22,5 @@
     <string name="_success">Yay, welcome to the club!!!</string>
     <string name="login_failed">Ouch, this is strange let\'s try again</string>
     <string name="login_success">Yay, Welcome to the club!!!</string>
+    <string name="desc_image_of_the_story">Image of the story</string>
 </resources>

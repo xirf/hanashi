@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class GetAllStoryResponse(
 
     @field:SerializedName("listStory")
-    val listStory: List<ListStoryItem>,
+    val listStory: ArrayList<ListStoryItem>,
 
     @field:SerializedName("error")
     val error: Boolean? = null,
