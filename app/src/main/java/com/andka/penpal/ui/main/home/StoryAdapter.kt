@@ -1,32 +1,41 @@
 package com.andka.penpal.ui.main.home
 
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.andka.penpal.R
 import com.andka.penpal.databinding.StoryItemBinding
 import com.andka.penpal.domain.ListStoryItem
 import com.andka.penpal.utils.getTimelineUpload
 import com.bumptech.glide.Glide
-import com.bumptech.glide.GlideBuilder
-import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.facebook.shimmer.Shimmer
+import com.facebook.shimmer.ShimmerDrawable
 
 class StoryAdapter : RecyclerView.Adapter<StoryAdapter.ListViewHolder>() {
     private val listStory = ArrayList<ListStoryItem>()
+    private val loaderList = ArrayList<Int>()
     private lateinit var onItemClickCallback: OnItemClickCallback
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = StoryItemBinding.bind(itemView)
-        fun bind(user: ListStoryItem) {
+        fun bind(user: ListStoryItem, position: Int) {
             with(binding) {
+                val shimmer = Shimmer.AlphaHighlightBuilder()
+                    .setBaseAlpha(0.7f)
+                    .setHighlightAlpha(0.6f)
+                    .setDirection(Shimmer.Direction.LEFT_TO_RIGHT)
+                    .setAutoStart(true)
+                    .build()
+
+                val shimmerDrawable = ShimmerDrawable().apply {
+                    setShimmer(shimmer)
+                }
+
                 title.text = user.name
                 Glide.with(itemView.context)
                     .load(user.photoUrl)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .placeholder(R.drawable.image_placeholder)
+                    .placeholder(shimmerDrawable)
                     .into(photo)
                 description.text = user.description
                 createdAt.text = getTimelineUpload(itemView.context, user.createdAt)
@@ -49,7 +58,7 @@ class StoryAdapter : RecyclerView.Adapter<StoryAdapter.ListViewHolder>() {
     override fun getItemCount(): Int = listStory.size
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        holder.bind(listStory[position])
+        holder.bind(listStory[position], position)
         holder.itemView.setOnClickListener {
             onItemClickCallback.onItemClicked(listStory[holder.adapterPosition])
         }

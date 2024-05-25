@@ -80,4 +80,5 @@ dependencies {
     implementation(libs.androidx.lifecycle.extensions)
     implementation(libs.androidx.datastore.preferences)
 
+    implementation(libs.androidveil)
 }

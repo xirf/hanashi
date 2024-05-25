@@ -11,6 +11,6 @@
         android:title="@string/menu_blank" />
     <item
         android:id="@+id/navigation_account"
-        android:icon="@drawable/ic_edit_black_24dp"
+        android:icon="@drawable/ic_user_white_24dp"
         android:title="@string/menu_add_story" />
 </menu>

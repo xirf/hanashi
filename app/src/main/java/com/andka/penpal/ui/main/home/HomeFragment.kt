@@ -36,7 +36,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
-        binding.rvStory.adapter = adapter
 
         userPreferences = UserPreferences.getInstance(requireContext().datastore)
         viewModel = ViewModelProvider(this)[StoryPaginationViewModel::class.java]
@@ -46,6 +45,7 @@ class HomeFragment : Fragment() {
         )[UserViewModel::class.java]
 
         getAllStories()
+        renderRecyclerView()
 
         return binding.root
     }
@@ -57,7 +57,7 @@ class HomeFragment : Fragment() {
                 viewModel.stories.observe(viewLifecycleOwner) {
                     if (it != null) {
                         adapter.setData(it.listStory)
-                        renderRecyclerView()
+                        binding.rvStory.unVeil()
                     }
                 }
             }
@@ -65,8 +65,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun renderRecyclerView() {
-        binding.rvStory.layoutManager = GridLayoutManager(context, 2)
-        binding.rvStory.addItemDecoration(GridSpacingItemDecoration(2, 16, true))
+        binding.rvStory.setAdapter(adapter)
+        binding.rvStory.setLayoutManager(GridLayoutManager(context, 2))
+        binding.rvStory.addVeiledItems(5)
+//        ?= GridLayoutManager(context, 2)
+//        binding.rvStory.addItemDecoration(GridSpacingItemDecoration(2, 16, true))
 
         adapter.setOnItemClickCallback {
             // val intent = Intent(requireContext(), DetailActivity::class.java)
