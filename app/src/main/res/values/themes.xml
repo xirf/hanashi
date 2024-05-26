@@ -1,19 +1,23 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.PenPal" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.Hanashi" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowBackground">@color/neutral</item>
+        <item name="android:colorBackground">@color/neutral</item>
+        <item name="android:windowEnterTransition">@android:transition/no_transition</item>
+        <item name="android:windowExitTransition">@android:transition/no_transition</item>
+        <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
+        <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
     </style>
 
-    <style name="Theme.PenPal" parent="Base.Theme.PenPal">
-        <item name="android:windowBackground">@color/neutral</item>
-    </style>
+    <style name="Theme.Hanashi" parent="Base.Theme.Hanashi" />
 
     <style name="Theme.CustomSplashScreen" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/primary</item>
         <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_foreground</item>
         <item name="windowSplashScreenAnimationDuration">500</item>
-        <item name="postSplashScreenTheme">@style/Theme.PenPal</item>
+        <item name="postSplashScreenTheme">@style/Theme.Hanashi</item>
     </style>
 
     <style name="Button.primary" parent="ShapeAppearanceOverlay.Material3.Button">

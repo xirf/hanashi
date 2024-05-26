@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.andka.penpal"
+    namespace = "com.andka.hanashi"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.andka.penpal"
+        applicationId = "com.andka.hanashi"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -37,7 +37,8 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
+
+    buildFeatures{
         viewBinding = true
         buildConfig = true
     }
@@ -53,9 +54,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.glide)
-
 
     // Retrofit
     implementation(libs.retrofit)

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pen Pal</string>
+    <string name="app_name">Hanashi</string>
     <string name="error_insecure_password">Password is too short. Please enter at least 8 characters.</string>
     <string name="error_invalid_email">The email address you entered is not valid. Please try again.</string>
     <string name="have_account">Already have an account?</string>
@@ -31,4 +31,7 @@
     <string name="menu_add_story">Add Story</string>
     <string name="menu_home">home</string>
     <string name="menu_blank">not a menu</string>
+    <string name="menu_exit">exit</string>
+    <string name="menu_refresh">refresh</string>
+    <string name="help_open_menu">open menu</string>
 </resources>
