@@ -35,4 +35,11 @@
     <string name="menu_refresh">refresh</string>
     <string name="help_open_menu">open menu</string>
     <string name="text_back">back</string>
+    <string name="error_offline">Look like you are offline?</string>
+    <string name="no_item">Nothing to show, tehe!</string>
+    <string name="description">What do you think?</string>
+    <string name="post">Post</string>
+    <string name="image_preview">image preview</string>
+    <string name="pick_from_gallery">pick from gallery</string>
+    <string name="take_from_camera">take from camera</string>
 </resources>

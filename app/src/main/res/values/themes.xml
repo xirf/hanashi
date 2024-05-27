@@ -10,13 +10,6 @@
 
     <style name="Theme.Hanashi" parent="Base.Theme.Hanashi" />
 
-    <style name="Theme.CustomSplashScreen" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/primary</item>
-        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_round</item>
-        <item name="windowSplashScreenAnimationDuration">500</item>
-        <item name="postSplashScreenTheme">@style/Base.Theme.Hanashi</item>
-    </style>
-
     <style name="Button.primary" parent="ShapeAppearanceOverlay.Material3.Button">
         <item name="backgroundTint">@color/primary</item>
     </style>

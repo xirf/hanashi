@@ -20,8 +20,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.andka.hanashi.R
 import com.andka.hanashi.databinding.ActivityMainBinding
 import com.andka.hanashi.domain.entity.StoryEntity
-import com.andka.hanashi.ui.detail_story.DetailActivity
 import com.andka.hanashi.ui.login.LoginActivity
+import com.andka.hanashi.ui.new_story.NewStoryActivity
 import com.andka.hanashi.utils.Locator
 import com.andka.hanashi.utils.ResultState
 import kotlinx.coroutines.launch
@@ -44,24 +44,28 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         installSplashScreen()
-        setContentView(binding.root)
+        enableEdgeToEdge()
 
-        // For strange reason this is needed to hide the action bar
-        actionBar?.hide()
-        supportActionBar?.hide()
+        setContentView(binding.root)
 
         setupSplashScreen()
         setupRecyclerView()
-        setupFab()
+        setupButton()
     }
 
-    private fun setupFab() {
+    private fun setupButton() {
+        binding.errorLayout.btnRetry.setOnClickListener {
+            fetchAllStories()
+            showError(false)
+        }
         binding.fab.openFab.setOnClickListener { toggleFab() }
         binding.fab.refresh.setOnClickListener {
             fetchAllStories()
             toggleFab()
+        }
+        binding.fab.addStory.setOnClickListener {
+            moveToAdd()
         }
     }
 
@@ -70,11 +74,6 @@ class MainActivity : AppCompatActivity() {
         binding.rvStory.setLayoutManager(GridLayoutManager(this, 2))
         binding.rvStory.addVeiledItems(10)
 
-        storyAdapter.setOnItemClickCallback {
-            val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra(DetailActivity.EXTRA_STORY_ID, it.id)
-            startActivity(intent)
-        }
         fetchAllStories()
     }
 
@@ -86,15 +85,34 @@ class MainActivity : AppCompatActivity() {
                     is ResultState.Success<List<StoryEntity>> -> {
                         if (it.resultGetStory.data != null) {
                             storyAdapter.setData(it.resultGetStory.data as ArrayList<StoryEntity>)
+                            binding.rvStory.unVeil()
+                        } else {
+                            showError(isError = true, isEmpty = true)
                         }
-                        binding.rvStory.unVeil()
                     }
 
                     is ResultState.Loading -> binding.rvStory.veil()
-                    is ResultState.Error -> {}
+                    is ResultState.Error -> {
+                        showError(true)
+                    }
+
                     is ResultState.Idle -> {}
                 }
             }
+        }
+    }
+
+    private fun showError(isError: Boolean, isEmpty: Boolean = false) {
+        var errorMessage = getString(R.string.error_offline)
+        if (isEmpty) errorMessage = getString(R.string.no_item)
+
+        val errorVisibility = if (isError) View.VISIBLE else View.GONE
+        val mainVisibility = if (!isError) View.VISIBLE else View.GONE
+        with(binding) {
+            errorLayout.tvErrorMessage.text = errorMessage
+            errorLayout.errorLayout.visibility = errorVisibility
+            rvStory.visibility = mainVisibility
+            fab.openFab.visibility = mainVisibility
         }
     }
 
@@ -170,5 +188,9 @@ class MainActivity : AppCompatActivity() {
     private fun navigateToLogin() {
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
+    }
+
+    private fun moveToAdd() {
+        startActivity(Intent(this, NewStoryActivity::class.java))
     }
 }

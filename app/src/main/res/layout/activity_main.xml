@@ -24,4 +24,8 @@
         android:id="@+id/fab"
         layout="@layout/expandable_fab_components" />
 
+    <include
+        android:id="@+id/errorLayout"
+        layout="@layout/error_offline_layout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

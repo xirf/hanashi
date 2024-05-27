@@ -27,6 +27,7 @@
             android:contentDescription="@string/desc_image_of_the_story"
             android:cropToPadding="true"
             android:scaleType="centerCrop"
+            android:transitionName="image"
             tools:src="@tools:sample/avatars" />
 
         <TextView
