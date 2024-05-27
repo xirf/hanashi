@@ -34,4 +34,5 @@
     <string name="menu_exit">exit</string>
     <string name="menu_refresh">refresh</string>
     <string name="help_open_menu">open menu</string>
+    <string name="text_back">back</string>
 </resources>

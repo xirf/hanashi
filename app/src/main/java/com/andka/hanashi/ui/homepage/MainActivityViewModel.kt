@@ -1,5 +1,7 @@
 package com.andka.hanashi.ui.homepage
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -27,6 +29,9 @@ class MainActivityViewModel(
 
     private val _isLoggedIn = MutableStateFlow(MainActivityViewState())
     val isLoggedIn = _isLoggedIn.asStateFlow()
+
+    private val _isReady = MutableLiveData(false)
+    val isReady: LiveData<Boolean> = _isReady
 
     private val _storyState = MutableStateFlow(MainActivityViewState())
     val storyState = _storyState.asStateFlow()
@@ -63,6 +68,7 @@ class MainActivityViewModel(
             getUserUseCase().collect { user ->
                 delay(2000)
                 _isLoggedIn.update { it.copy(resultGetUser = ResultState.Success(user.token.isNotEmpty())) }
+                _isReady.postValue(true)
             }
         }
     }

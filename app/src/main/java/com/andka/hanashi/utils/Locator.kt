@@ -7,11 +7,13 @@ import com.andka.hanashi.data.repository.AuthRepository
 import com.andka.hanashi.data.repository.StoryRepository
 import com.andka.hanashi.data.source.local.UserPreferences
 import com.andka.hanashi.data.source.remote.ApiConfig
+import com.andka.hanashi.domain.usecase.GetDetailUseCase
 import com.andka.hanashi.domain.usecase.GetStoriesUseCase
 import com.andka.hanashi.domain.usecase.GetUserUseCase
 import com.andka.hanashi.domain.usecase.LoginUseCase
 import com.andka.hanashi.domain.usecase.LogoutUseCase
 import com.andka.hanashi.domain.usecase.RegisterUseCase
+import com.andka.hanashi.ui.detail_story.DetailViewModel
 import com.andka.hanashi.ui.homepage.MainActivityViewModel
 import com.andka.hanashi.ui.login.LoginViewModel
 import com.andka.hanashi.ui.register.RegisterViewModel
@@ -20,7 +22,8 @@ object Locator {
     private var application: Application? = null
 
     private inline val requireApplication
-        get() = application ?: error("Missing call: initWith(application)")
+        get() = application
+            ?: error("You forgot to call Locator.initWith(application) in your Application class")
 
     fun initWith(application: Application) {
         this.application = application
@@ -28,15 +31,19 @@ object Locator {
 
     private val Context.dataStore by preferencesDataStore(name = "user_preferences")
 
-    val loginViewModelFactory get() = LoginViewModel.Factory(loginUseCase = loginUseCase)
-    val registerViewModelFactory get() = RegisterViewModel.Factory(registerUseCase = registerUseCase)
-    val mainActivityViewModelFactory get() = MainActivityViewModel.Factory(getUserUseCase = getUserUseCase, logoutUseCase = logoutUseCase, getStoriesUseCase = getStoriesUseCase)
-
     private val loginUseCase get() = LoginUseCase(userPreferencesRepository, authRepository)
     private val registerUseCase get() = RegisterUseCase(authRepository)
     private val getStoriesUseCase get() = GetStoriesUseCase(storyRepository)
     private val logoutUseCase get() = LogoutUseCase(userPreferencesRepository)
     private val getUserUseCase get() = GetUserUseCase(userPreferencesRepository)
+    private val getDetailUseCase get() = GetDetailUseCase(storyRepository)
+
+
+    val loginViewModelFactory get() = LoginViewModel.Factory(loginUseCase)
+    val registerViewModelFactory get() = RegisterViewModel.Factory(registerUseCase)
+    val mainActivityViewModelFactory get() = MainActivityViewModel.Factory(getUserUseCase, logoutUseCase, getStoriesUseCase)
+    val detailViewModelFactory get() = DetailViewModel.Factory(getDetailUseCase)
+
 
     private val userPreferencesRepository by lazy { UserPreferences(requireApplication.dataStore) }
     private val authRepository by lazy { AuthRepository(ApiConfig(requireApplication.dataStore).getApiService()) }
