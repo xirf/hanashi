@@ -42,4 +42,5 @@
     <string name="image_preview">image preview</string>
     <string name="pick_from_gallery">pick from gallery</string>
     <string name="take_from_camera">take from camera</string>
+    <string name="nothing_here">Nothing here!</string>
 </resources>

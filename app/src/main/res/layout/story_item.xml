@@ -21,7 +21,7 @@
         app:layout_constraintLeft_toLeftOf="parent">
 
         <ImageView
-            android:id="@+id/photo"
+            android:id="@+id/iv_item_photo"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:contentDescription="@string/desc_image_of_the_story"
@@ -31,7 +31,7 @@
             tools:src="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/tv_item_name"
             android:layout_width="match_parent"
             android:layout_height="24dp"
             android:layout_marginHorizontal="8dp"
@@ -42,7 +42,7 @@
             tools:text="Title" />
 
         <TextView
-            android:id="@+id/description"
+            android:id="@+id/tv_item_desc"
             android:layout_width="match_parent"
             android:layout_height="18dp"
             android:layout_marginHorizontal="8dp"
@@ -53,7 +53,7 @@
             tools:text="Description" />
 
         <TextView
-            android:id="@+id/createdAt"
+            android:id="@+id/tv_created_at"
             android:layout_width="wrap_content"
             android:minWidth="100dp"
             android:layout_height="14dp"

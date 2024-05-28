@@ -8,4 +8,5 @@
     <color name="neutral">#fefefe</color>
     <color name="neutralDark">#f6f6f6</color>
     <color name="transparent">#00000000</color>
+    <color name="gray">#ccd0da</color>
 </resources>

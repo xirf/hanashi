@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -10,22 +9,43 @@
     android:orientation="vertical"
     tools:context=".ui.homepage.MainActivity">
 
-    <com.skydoves.androidveil.VeilRecyclerFrameView
-        android:id="@+id/rv_story"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="8dp"
-        app:veilFrame_isItemWrapContentHeight="true"
-        app:veilFrame_layout="@layout/story_item"
-        app:veilFrame_radius="8dp"
-        app:veilFrame_veiled="true" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <include
-        android:id="@+id/fab"
-        layout="@layout/expandable_fab_components" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:clipToPadding="false"
+        app:activeIndicatorLabelPadding="0dp"
+        app:itemActiveIndicatorStyle="@color/transparent"
+        app:itemBackground="@color/transparent"
+        app:itemIconTint="@color/bottom_navigation_colors"
+        app:itemTextColor="@color/bottom_navigation_colors"
+        app:labelVisibilityMode="unlabeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation_menu" />
 
-    <include
-        android:id="@+id/errorLayout"
-        layout="@layout/error_offline_layout" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/primary"
+        android:contentDescription="@string/help_add_story"
+        android:src="@drawable/ic_edit_white_24dp"
+        app:layout_constraintBottom_toBottomOf="@id/bottom_navigation"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/bottom_navigation"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.FAB"
+        app:tint="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

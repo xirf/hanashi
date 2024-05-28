@@ -3,4 +3,13 @@
     <declare-styleable name="MatchPatternEditText">
         <attr name="android:inputType" />
     </declare-styleable>
+
+    <declare-styleable name="MyRecyclerView">
+        <attr name="errorText" format="string" />
+        <attr name="errorIcon" format="reference" />
+        <attr name="emptyText" format="string" />
+        <attr name="emptyIcon" format="reference" />
+        <attr name="paddingVertical" format="integer" />
+        <attr name="paddingHorizontal" format="integer" />
+    </declare-styleable>
 </resources>
