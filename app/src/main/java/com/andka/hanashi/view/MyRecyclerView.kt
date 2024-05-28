@@ -1,9 +1,5 @@
 package com.andka.hanashi.view
 
-// Catatan ke reviewer
-// view ini merupakan modifikasi dari sini: https://susuthapa19961227.medium.com/recycler-view-with-empty-view-loading-view-and-error-view-1266c34c1504
-
-
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -25,23 +21,20 @@ class MyRecyclerView(
     constructor(context: Context) : this(context, null, 0)
     constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0)
 
-    private val binding: MyRecyclerViewLayoutBinding =
-        MyRecyclerViewLayoutBinding.inflate(LayoutInflater.from(context), this)
-
+    private val binding: MyRecyclerViewLayoutBinding = MyRecyclerViewLayoutBinding.inflate(LayoutInflater.from(context), this)
     private val errorBinding: RecyclerErrorLayoutBinding = binding.customErrorView
     private val emptyBinding: RecyclerEmptyLayoutBinding = binding.customEmptyView
     private val loadingBinding: RecyclerLoadingLayoutBinding = binding.customOverlayView
 
-    val recyclerView: RecyclerView
-        get() = binding.customRecyclerView
+    val recyclerView: RecyclerView get() = binding.customRecyclerView
 
-    var errorText: String = ""
+    private var errorText: String = ""
         set(value) {
             field = value
             errorBinding.errorMsgText.text = value
         }
 
-    var emptyText: String = ""
+    private var emptyText: String = ""
         set(value) {
             field = value
             emptyBinding.emptyMessage.text = value
@@ -71,16 +64,10 @@ class MyRecyclerView(
             0
         ).apply {
             try {
-                errorText =
-                    getString(R.styleable.MyRecyclerView_errorText) ?: "Something went wrong"
-                emptyText =
-                    getString(R.styleable.MyRecyclerView_emptyText) ?: "Nothing to show"
-                errorIcon = getResourceId(
-                    R.styleable.MyRecyclerView_errorIcon,
-                    R.drawable.hosnino_ai
-                )
-                emptyIcon =
-                    getInt(R.styleable.MyRecyclerView_emptyIcon, R.drawable.hosnino_ai)
+                errorText = getString(R.styleable.MyRecyclerView_errorText) ?: "Something went wrong"
+                emptyText = getString(R.styleable.MyRecyclerView_emptyText) ?: "Nothing to show"
+                errorIcon = getResourceId(R.styleable.MyRecyclerView_errorIcon, R.drawable.hosnino_ai)
+                emptyIcon = getInt(R.styleable.MyRecyclerView_emptyIcon, R.drawable.hosnino_ai)
                 val pH = getInt(R.styleable.MyRecyclerView_paddingHorizontal, 0)
                 val pV = getInt(R.styleable.MyRecyclerView_paddingVertical, 0)
                 recyclerView.setPadding(pH, pV, pH, pV)
@@ -94,7 +81,6 @@ class MyRecyclerView(
         emptyText = msg ?: emptyText
         loadingBinding.root.visibility = View.GONE
         errorBinding.root.visibility = View.GONE
-
         emptyBinding.root.visibility = View.VISIBLE
     }
 
@@ -102,7 +88,6 @@ class MyRecyclerView(
         errorText = msg ?: errorText
         loadingBinding.root.visibility = View.GONE
         emptyBinding.root.visibility = View.GONE
-
         errorBinding.root.visibility = View.VISIBLE
     }
 
@@ -131,9 +116,7 @@ class MyRecyclerView(
     }
 
     fun setOnRetryClickListener(callback: () -> Unit) {
-        errorBinding.retryButton.setOnClickListener {
-            callback()
-        }
+        errorBinding.retryButton.setOnClickListener { callback() }
     }
 
     enum class ViewStatus {

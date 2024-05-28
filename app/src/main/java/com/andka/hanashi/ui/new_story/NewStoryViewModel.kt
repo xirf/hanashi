@@ -1,0 +1,40 @@
+package com.andka.hanashi.ui.new_story
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.andka.hanashi.domain.usecase.NewStoryUseCase
+import com.andka.hanashi.utils.ResultState
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
+import java.io.File
+
+class NewStoryViewModel(
+    private val newStoryUseCase: NewStoryUseCase
+) : ViewModel() {
+    data class NewStoryViewState(
+        val resultNewStory: ResultState<String> = ResultState.Idle()
+    )
+
+    private val _newStoryState = MutableStateFlow(NewStoryViewState())
+    val newStoryState = _newStoryState.asStateFlow()
+
+    fun newStory(file: File, description: String) {
+        newStoryUseCase(file, description).onEach { res ->
+            _newStoryState.update { it.copy(resultNewStory = res) }
+        }
+    }
+
+    class Factory(
+        private val newStoryUseCase: NewStoryUseCase
+    ) : ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(NewStoryViewModel::class.java)) {
+                return NewStoryViewModel(newStoryUseCase) as T
+            }
+            error("Unknown ViewModel class: $modelClass")
+        }
+    }
+}
