@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.fragment.app.Fragment
 import com.andka.hanashi.R
 import com.andka.hanashi.databinding.ActivityMainBinding
 import com.andka.hanashi.ui.homepage.home.HomeFragment
@@ -31,7 +32,6 @@ class MainActivity : AppCompatActivity() {
     // Properties
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val viewModel by viewModels<MainActivityViewModel>(factoryProducer = { Locator.mainActivityViewModelFactory })
-    private var currentFragment = R.id.navigation_home
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,62 +42,51 @@ class MainActivity : AppCompatActivity() {
 
         setupNavigation()
         binding.buttonAdd.setOnClickListener { moveToAdd() }
-
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, HomeFragment.newInstance())
-            .commit()
     }
 
     private fun setupNavigation() {
-        binding.bottomNavigation.setOnItemSelectedListener { item ->
-            moveTo(item.itemId)
+        loadFragment(HomeFragment())
+        binding.bottomNavigation.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.navigation_home -> {
+                    loadFragment(HomeFragment())
+                    true
+                }
+
+                R.id.navigation_profile -> {
+                    loadFragment(ProfileFragment())
+                    true
+                }
+
+                else -> false
+            }
         }
     }
 
-    private fun moveTo(fragmentId: Int): Boolean {
-        // to top
-        if (fragmentId == currentFragment) return false
-
-        val fragment = when (fragmentId) {
-            R.id.navigation_home -> HomeFragment.newInstance()
-            R.id.navigation_profile -> ProfileFragment.newInstance()
-            // Add other cases for other fragments
-            else -> return false
-        }
-
-        supportFragmentManager.beginTransaction()
-//        .setCustomAnimations(
-//            R.anim.slide_in_right,  // enter
-//            R.anim.slide_out_left,  // exit
-//            R.anim.slide_in_left,  // popEnter
-//            R.anim.slide_out_right  // popExit
-//        )
-            .replace(R.id.fragment_container, fragment)
-            .commit()
-
-        currentFragment = fragmentId
-        return true
+    private fun loadFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
     }
 
     private fun setupSplashScreen() {
         val content: View = binding.root
-        content.viewTreeObserver.addOnPreDrawListener(
-            object : ViewTreeObserver.OnPreDrawListener {
-                override fun onPreDraw(): Boolean {
-                    val isLoggedIn = viewModel.isLoggedIn.value
+        content.viewTreeObserver.addOnPreDrawListener(object :
+            ViewTreeObserver.OnPreDrawListener {
+            override fun onPreDraw(): Boolean {
+                val isLoggedIn = viewModel.isLoggedIn.value
 
-                    if (isLoggedIn.resultGetUser is ResultState.Success) {
-                        content.viewTreeObserver.removeOnPreDrawListener(this)
-                        if (isLoggedIn.resultGetUser.data == false) {
-                            navigateToLogin()
-                        }
-                        return true
-                    } else {
-                        return false
+                if (isLoggedIn.resultGetUser is ResultState.Success) {
+                    content.viewTreeObserver.removeOnPreDrawListener(this)
+                    if (isLoggedIn.resultGetUser.data == false) {
+                        navigateToLogin()
                     }
+                    return true
+                } else {
+                    return false
                 }
             }
-        )
+        })
 
         setupSplashScreenExitAnimation()
     }
@@ -105,10 +94,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupSplashScreenExitAnimation() {
         splashScreen.setOnExitAnimationListener { splashScreenView ->
             val slideUp = ObjectAnimator.ofFloat(
-                splashScreenView,
-                View.TRANSLATION_Y,
-                0f,
-                -splashScreenView.height.toFloat()
+                splashScreenView, View.TRANSLATION_Y, 0f, splashScreenView.height.toFloat()
             )
             val alpha = ObjectAnimator.ofFloat(splashScreenView, View.ALPHA, 1f, 0f)
 
@@ -127,6 +113,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }
+
 
     private fun moveToAdd() {
         startActivity(Intent(this, NewStoryActivity::class.java))

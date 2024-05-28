@@ -31,7 +31,6 @@ navigationUiKtx = "2.7.7"
 swiperefreshlayout = "1.1.0"
 
 [libraries]
-androidveil = { module = "com.github.skydoves:androidveil", version.ref = "androidveil" }
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
 androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "cameraCamera2" }
 androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraLifecycle" }

@@ -43,4 +43,10 @@
     <string name="pick_from_gallery">pick from gallery</string>
     <string name="take_from_camera">take from camera</string>
     <string name="nothing_here">Nothing here!</string>
+    <string name="no_permissions">Failed to get permissions</string>
+    <string name="take_image">Select an image</string>
+    <string name="no_image">Did you forgot to add the image?</string>
+    <string name="posted">Yay!! your story is posted</string>
+    <string name="post_failed">Ouch, your was failed</string>
+    <string name="image_loading">We still cooking you image</string>
 </resources>
