@@ -111,7 +111,6 @@ class MyRecyclerView(
             ViewStatus.ERROR -> showErrorView(message)
             ViewStatus.EMPTY -> showEmptyView(message)
             ViewStatus.ON_DATA -> {}
-
         }
     }
 

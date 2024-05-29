@@ -56,7 +56,7 @@
         app:layout_constraintTop_toBottomOf="@id/sub_headline"
         tools:layout_editor_absoluteX="16dp">
 
-        <com.andka.hanashi.view.EmailEditText
+        <com.andka.hanashi.widget.EmailEditText
             android:id="@+id/ed_login_email"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -70,7 +70,7 @@
             android:textSize="14sp"
             android:transitionName="email" />
 
-        <com.andka.hanashi.view.PasswordEditText
+        <com.andka.hanashi.widget.PasswordEditText
             android:id="@+id/ed_login_password"
             android:layout_width="match_parent"
             android:layout_height="48dp"
