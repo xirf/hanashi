@@ -1,48 +1,50 @@
-package com.andka.hanashi.ui.homepage
+package com.andka.hanashi.ui.homepage.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.andka.hanashi.domain.entity.StoryEntity
 import com.andka.hanashi.domain.usecase.GetUserUseCase
+import com.andka.hanashi.domain.usecase.LogoutUseCase
 import com.andka.hanashi.utils.ResultState
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class MainActivityViewModel(
+class ProfileViewModel(
     private val getUserUseCase: GetUserUseCase,
+    private val logoutUseCase: LogoutUseCase
 ) : ViewModel() {
-    data class MainActivityViewState(
-        val resultGetUser: ResultState<Boolean> = ResultState.Idle(),
-        val resultGetStory: ResultState<List<StoryEntity>> = ResultState.Idle(),
+    data class ProfileFragmentViewState(
+        val resultGetUser: ResultState<String> = ResultState.Idle(),
         val username: String = ""
     )
 
-    private val _isLoggedIn = MutableStateFlow(MainActivityViewState())
-    val isLoggedIn = _isLoggedIn.asStateFlow()
+    private val _userState = MutableStateFlow(ProfileFragmentViewState())
+    val userState = _userState
 
-
-    init {
-        getIsLoggedIn()
-    }
-
-    private fun getIsLoggedIn() {
+    fun getUser() {
         viewModelScope.launch {
             getUserUseCase().collect { user ->
-                _isLoggedIn.update { it.copy(resultGetUser = ResultState.Success(user.token.isNotEmpty())) }
+                _userState.update { it.copy(username = user.name) }
             }
         }
     }
 
+    fun logout() {
+        viewModelScope.launch {
+            logoutUseCase()
+        }
+    }
+
+
     class Factory(
         private val getUserUseCase: GetUserUseCase,
+        private val logoutUseCase: LogoutUseCase
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(MainActivityViewModel::class.java)) {
-                return MainActivityViewModel(getUserUseCase) as T
+            if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {
+                return ProfileViewModel(getUserUseCase, logoutUseCase) as T
             }
             error("Unknown ViewModel class: $modelClass")
         }

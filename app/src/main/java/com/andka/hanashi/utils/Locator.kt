@@ -11,6 +11,7 @@ import com.andka.hanashi.domain.usecase.*
 import com.andka.hanashi.ui.detail_story.DetailViewModel
 import com.andka.hanashi.ui.homepage.MainActivityViewModel
 import com.andka.hanashi.ui.homepage.home.HomeViewModel
+import com.andka.hanashi.ui.homepage.profile.ProfileViewModel
 import com.andka.hanashi.ui.login.LoginViewModel
 import com.andka.hanashi.ui.new_story.NewStoryViewModel
 import com.andka.hanashi.ui.register.RegisterViewModel
@@ -36,6 +37,7 @@ object Locator {
     val registerViewModelFactory get() = RegisterViewModel.Factory(RegisterUseCase(authRepository))
     val mainActivityViewModelFactory get() = MainActivityViewModel.Factory(GetUserUseCase(userPreferencesRepository))
     val detailViewModelFactory get() = DetailViewModel.Factory(GetDetailUseCase(storyRepository))
-    val profileViewModelFactory get() = HomeViewModel.Factory(GetUserUseCase(userPreferencesRepository), GetStoriesUseCase(storyRepository))
+    val homeViewModelFactory get() = HomeViewModel.Factory(GetStoriesUseCase(storyRepository), LogoutUseCase(userPreferencesRepository), GetUserUseCase(userPreferencesRepository))
     val newStoryViewModelFactory get() = NewStoryViewModel.Factory(NewStoryUseCase(storyRepository))
+    val profileViewModelFactory get() = ProfileViewModel.Factory(GetUserUseCase(userPreferencesRepository), LogoutUseCase(userPreferencesRepository))
 }

@@ -6,7 +6,6 @@
     <string name="hello_blank_fragment">Hello Blank Fragment</string>
     <string name="help_add_story">add story</string>
     <string name="help_email">Email</string>
-    <string name="help_login_image">Person reading a book</string>
     <string name="help_name">Name</string>
     <string name="help_password">Password</string>
     <string name="login">Login</string>
@@ -47,6 +46,16 @@
     <string name="take_image">Select an image</string>
     <string name="no_image">Did you forgot to add the image?</string>
     <string name="posted">Yay!! your story is posted</string>
-    <string name="post_failed">Ouch, your was failed</string>
+    <string name="post_failed">Ouch, we can\'t post it</string>
     <string name="image_loading">We still cooking you image</string>
+    <string name="change_language">Change language</string>
+    <string name="logout">logout</string>
+    <string name="reason">" reason: "</string>
+    <string name="see_you_later">See you later</string>
+    <string-array name="tod">
+        <item>Good Morning</item>
+        <item>Good Afternoon</item>
+        <item>Good Evening</item>
+        <item>Good Night</item>
+    </string-array>
 </resources>

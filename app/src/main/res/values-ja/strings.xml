@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">Hanashi</string>
+    <string name="error_insecure_password">パスワードが短すぎます。8文字以上を入力してください。</string>
+    <string name="error_invalid_email">入力したメールアドレスは無効です。もう一度お試しください。</string>
+    <string name="have_account">すでにアカウントをお持ちですか?</string>
+    <string name="hello_blank_fragment">こんにちは、空白のフラグメント</string>
+    <string name="help_add_story">ストーリーを追加</string>
+    <string name="help_email">メールアドレス</string>
+    <string name="help_name">名前</string>
+    <string name="help_password">パスワード</string>
+    <string name="login">ログイン</string>
+    <string name="login_subheadline">あなたに合わせた魅力的なストーリーを探求しましょう</string>
+    <string name="no_account">アカウントをお持ちではありませんか?</string>
+    <string name="register">登録</string>
+    <string name="register_headline">始めましょう</string>
+    <string name="register_subheadline">まずは自己紹介し、アカウントを作成しましょう。</string>
+    <string name="welcome_back">お帰りなさい！</string>
+    <string name="register_success">クラブへようこそ！続けるにはログインしてください</string>
+    <string name="register_failed">おっと、問題が発生しました。もう一度お試しください</string>
+    <string name="empty_field">あれ？ これを忘れていませんか？</string>
+    <string name="_success">やったー！ クラブへようこそ！！！</string>
+    <string name="login_failed">おっと、これは変ですね。もう一度お試しください</string>
+    <string name="login_success">やったー！ クラブへようこそ！！！</string>
+    <string name="desc_image_of_the_story">ストーリーの画像</string>
+    <string name="text_seconds_ago">秒前</string>
+    <string name="text_minutes_ago">分前</string>
+    <string name="text_hours_ago">時間前</string>
+    <string name="text_days_ago">日前</string>
+    <string name="menu_profile">プロフィール</string>
+    <string name="menu_add_story">ストーリーを追加</string>
+    <string name="menu_home">ホーム</string>
+    <string name="menu_blank">メニューではない</string>
+    <string name="menu_exit">終了</string>
+    <string name="menu_refresh">更新</string>
+    <string name="help_open_menu">メニューを開く</string>
+    <string name="text_back">戻る</string>
+    <string name="error_offline">オフラインのようですか？</string>
+    <string name="no_item">表示するものがありません、てへ！</string>
+    <string name="description">どう思いますか？</string>
+    <string name="post">投稿</string>
+    <string name="image_preview">画像プレビュー</string>
+    <string name="pick_from_gallery">ギャラリーから選択</string>
+    <string name="take_from_camera">カメラで撮影</string>
+    <string name="nothing_here">ここには何もありません！</string>
+    <string name="no_permissions">権限を取得できませんでした</string>
+    <string name="take_image">画像を選択</string>
+    <string name="no_image">画像を追加し忘れましたか？</string>
+    <string name="posted">やったー！ あなたのストーリーが投稿されました</string>
+    <string name="post_failed">おっと、投稿できませんでした</string>
+    <string name="image_loading">画像を処理中です</string>
+    <string name="change_language">言語を変更</string>
+    <string name="logout">ログアウト</string>
+    <string name="reason">" 理由: "</string>
+    <string-array name="tod">
+        <item>おはようございます</item>
+        <item>こんにちは</item>
+        <item>こんばんは</item>
+        <item>おやすみなさい</item>
+    </string-array>
+    <string name="see_you_later">じゃあね</string>
+</resources>

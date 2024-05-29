@@ -79,7 +79,13 @@ class NewStoryActivity : AppCompatActivity() {
                     is ResultState.Loading -> showLoading(true)
                     is ResultState.Error -> {
                         showLoading(false)
-                        showToast(this@NewStoryActivity, getString(R.string.post_failed))
+                        val errorMessage = state.resultNewStory.message
+                        val finalErrorMessage = StringBuilder()
+                            .append(getString(R.string.post_failed))
+                            .append(getString(R.string.reason))
+                            .append(errorMessage).toString()
+
+                        showToast(this@NewStoryActivity, finalErrorMessage)
                     }
 
                     else -> showLoading(false)
@@ -107,7 +113,7 @@ class NewStoryActivity : AppCompatActivity() {
             showToast(this, getString(R.string.image_loading))
         } else {
             selectedFile?.let {
-                viewModel.newStory(it, description)
+                viewModel.newStory(it, description.trim())
             } ?: showToast(this, getString(R.string.no_image))
         }
 

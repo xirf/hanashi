@@ -1,4 +1,4 @@
-package com.andka.hanashi.view
+package com.andka.hanashi.widget
 
 import android.content.Context
 import android.util.AttributeSet

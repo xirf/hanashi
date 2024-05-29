@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">Hanashi</string>
+    <string name="error_insecure_password">Kata sandi terlalu pendek. Silakan masukkan setidaknya 8 karakter.</string>
+    <string name="error_invalid_email">Alamat email yang Anda masukkan tidak valid. Silakan coba lagi.</string>
+    <string name="have_account">Sudah memiliki akun?</string>
+    <string name="hello_blank_fragment">Halo Blank Fragment</string>
+    <string name="help_add_story">tambah cerita</string>
+    <string name="help_email">Email</string>
+    <string name="help_name">Nama</string>
+    <string name="help_password">Kata Sandi</string>
+    <string name="login">Masuk</string>
+    <string name="login_subheadline">Mari kita jelajahi cerita-cerita menarik yang dipersonalisasi untuk Anda</string>
+    <string name="no_account">Belum punya akun?</string>
+    <string name="register">Daftar</string>
+    <string name="register_headline">Mari Mulai</string>
+    <string name="register_subheadline">Pertama mari kita kenal dulu dan kemudian buat akun Anda di sini.</string>
+    <string name="welcome_back">Selamat Datang Kembali!</string>
+    <string name="register_success">Selamat datang di klub!, Mari Masuk untuk melanjutkan</string>
+    <string name="register_failed">Ups, sepertinya ada masalah, mari coba lagi</string>
+    <string name="empty_field">Hmmm… Anda lupa mengisi ini, bukan?</string>
+    <string name="_success">Yay, selamat datang di klub!!!</string>
+    <string name="login_failed">Aduh, ini aneh mari coba lagi</string>
+    <string name="login_success">Yay, Selamat datang di klub!!!</string>
+    <string name="desc_image_of_the_story">Gambar cerita</string>
+    <string name="text_seconds_ago">detik yang lalu</string>
+    <string name="text_minutes_ago">menit yang lalu</string>
+    <string name="text_hours_ago">jam yang lalu</string>
+    <string name="text_days_ago">hari yang lalu</string>
+    <string name="menu_profile">Profil</string>
+    <string name="menu_add_story">Tambah Cerita</string>
+    <string name="menu_home">beranda</string>
+    <string name="menu_blank">bukan menu</string>
+    <string name="menu_exit">keluar</string>
+    <string name="menu_refresh">perbarui</string>
+    <string name="help_open_menu">buka menu</string>
+    <string name="text_back">kembali</string>
+    <string name="error_offline">Sepertinya Anda sedang offline?</string>
+    <string name="no_item">Tidak ada yang ditampilkan, tehe!</string>
+    <string name="description">Apa pendapat Anda?</string>
+    <string name="post">Posting</string>
+    <string name="image_preview">pratinjau gambar</string>
+    <string name="pick_from_gallery">ambil dari galeri</string>
+    <string name="take_from_camera">ambil dari kamera</string>
+    <string name="nothing_here">Tidak ada di sini!</string>
+    <string name="no_permissions">Gagal mendapatkan izin</string>
+    <string name="take_image">Pilih gambar</string>
+    <string name="no_image">Apakah Anda lupa menambahkan gambar?</string>
+    <string name="posted">Yay!! cerita Anda telah diposting</string>
+    <string name="post_failed">Aduh, kami tidak bisa mempostingnya</string>
+    <string name="image_loading">Kami masih memproses gambar Anda</string>
+    <string name="change_language">Ganti bahasa</string>
+    <string name="logout">keluar</string>
+    <string name="reason">" alasan: "</string>
+    <string-array name="tod">
+        <item>Selamat Pagi</item>
+        <item>Selamat Siang</item>
+        <item>Selamat Sore</item>
+        <item>Selamat Malam</item>
+    </string-array>
+    <string name="see_you_later">Sampai jumpa lagi</string>
+</resources>
