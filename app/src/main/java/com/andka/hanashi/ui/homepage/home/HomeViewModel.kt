@@ -3,11 +3,12 @@ package com.andka.hanashi.ui.homepage.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.andka.hanashi.domain.entity.StoryEntity
 import com.andka.hanashi.domain.usecase.GetStoriesUseCase
 import com.andka.hanashi.domain.usecase.GetUserUseCase
 import com.andka.hanashi.domain.usecase.LogoutUseCase
-import com.andka.hanashi.utils.ResultState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -19,7 +20,7 @@ class HomeViewModel(
 ) : ViewModel() {
 
     data class HomeFragmentViewState(
-        val resultGetStory: ResultState<List<StoryEntity>> = ResultState.Idle(),
+        val resultGetStory: PagingData<StoryEntity> = PagingData.empty(),
         val username: String = ""
     )
 
@@ -28,7 +29,7 @@ class HomeViewModel(
 
     fun getStories() {
         viewModelScope.launch {
-            getStoriesUseCase().collect { stories ->
+            getStoriesUseCase().cachedIn(viewModelScope).collect { stories ->
                 _storyState.update { it.copy(resultGetStory = stories) }
             }
         }

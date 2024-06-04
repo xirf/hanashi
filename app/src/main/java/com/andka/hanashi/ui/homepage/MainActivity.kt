@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import com.andka.hanashi.R
 import com.andka.hanashi.databinding.ActivityMainBinding
 import com.andka.hanashi.ui.homepage.home.HomeFragment
+import com.andka.hanashi.ui.homepage.maps.MapsFragment
 import com.andka.hanashi.ui.homepage.profile.ProfileFragment
 import com.andka.hanashi.ui.login.LoginActivity
 import com.andka.hanashi.ui.new_story.NewStoryActivity
@@ -55,6 +56,11 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.navigation_profile -> {
                     loadFragment(ProfileFragment())
+                    true
+                }
+
+                R.id.navigation_maps -> {
+                    loadFragment(MapsFragment())
                     true
                 }
 

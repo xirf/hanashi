@@ -28,7 +28,7 @@ class SlideUpItemAnimator : DefaultItemAnimator() {
         val view = holder.itemView
         view.translationY = view.height.toFloat()
         view.alpha = 0f
-        val startDelay = (holder.adapterPosition * 50L).coerceAtMost(1000L)
+        val startDelay = (holder.bindingAdapterPosition * 50L).coerceAtMost(1000L)
 
         val animator = createAnimator(view, View.TRANSLATION_Y, 0f, startDelay)
         val fadeAnimator = createAnimator(view, View.ALPHA, 1f, startDelay)

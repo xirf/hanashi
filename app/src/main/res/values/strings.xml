@@ -52,6 +52,8 @@
     <string name="logout">logout</string>
     <string name="reason">" reason: "</string>
     <string name="see_you_later">See you later</string>
+    <string name="menu_maps">maps</string>
+    <string name="retry">try again</string>
     <string-array name="tod">
         <item>Good Morning</item>
         <item>Good Afternoon</item>
