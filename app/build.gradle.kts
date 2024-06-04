@@ -47,6 +47,7 @@ android {
 }
 
 dependencies {
+    testImplementation("junit:junit:4.12")
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)

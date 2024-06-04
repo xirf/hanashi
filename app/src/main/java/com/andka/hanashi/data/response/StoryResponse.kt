@@ -12,5 +12,5 @@ data class StoryResponse(
     val lat: Double,
     val lon: Double,
     val name: String,
-    val photoUrl: String
+    val photoUrl: String,
 )

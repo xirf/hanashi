@@ -1,6 +1,7 @@
 package com.andka.hanashi.domain.usecase
 
 import com.andka.hanashi.data.repository.AuthRepository
+import com.andka.hanashi.domain.contract.RegisterUseCaseContract
 import com.andka.hanashi.utils.ResultState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -8,8 +9,12 @@ import kotlinx.coroutines.flow.flow
 
 class RegisterUseCase(
     private val authRepository: AuthRepository
-) {
-    operator fun invoke(name: String, email: String, password: String): Flow<ResultState<String>> =
+) : RegisterUseCaseContract {
+    override operator fun invoke(
+        name: String,
+        email: String,
+        password: String
+    ): Flow<ResultState<String>> =
         flow {
             emit(ResultState.Loading())
             authRepository.register(name, email, password).catch { err ->
