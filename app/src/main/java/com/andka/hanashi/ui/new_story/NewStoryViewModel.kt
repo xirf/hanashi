@@ -3,6 +3,7 @@ package com.andka.hanashi.ui.new_story
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.andka.hanashi.domain.contract.NewStoryUseCaseContract
 import com.andka.hanashi.domain.usecase.NewStoryUseCase
 import com.andka.hanashi.utils.ResultState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +14,7 @@ import kotlinx.coroutines.flow.update
 import java.io.File
 
 class NewStoryViewModel(
-    private val newStoryUseCase: NewStoryUseCase
+    private val newStoryUseCase: NewStoryUseCaseContract
 ) : ViewModel() {
     data class NewStoryViewState(
         val resultNewStory: ResultState<String> = ResultState.Idle()
@@ -29,7 +30,7 @@ class NewStoryViewModel(
     }
 
     class Factory(
-        private val newStoryUseCase: NewStoryUseCase
+        private val newStoryUseCase: NewStoryUseCaseContract
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {

@@ -5,18 +5,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.andka.hanashi.domain.contract.GetStoriesUseCaseContract
+import com.andka.hanashi.domain.contract.GetUserUseCaseContract
+import com.andka.hanashi.domain.contract.LogoutUseCaseContract
 import com.andka.hanashi.domain.entity.StoryEntity
-import com.andka.hanashi.domain.usecase.GetStoriesUseCase
-import com.andka.hanashi.domain.usecase.GetUserUseCase
-import com.andka.hanashi.domain.usecase.LogoutUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    private val getStoriesUseCase: GetStoriesUseCase,
-    private val logoutUseCase: LogoutUseCase,
-    private val getUserUseCase: GetUserUseCase
+    private val getStoriesUseCase: GetStoriesUseCaseContract,
+    private val logoutUseCase: LogoutUseCaseContract,
+    private val getUserUseCase: GetUserUseCaseContract
 ) : ViewModel() {
 
     data class HomeFragmentViewState(
@@ -50,9 +50,9 @@ class HomeViewModel(
     }
 
     class Factory(
-        private val getStoriesUseCase: GetStoriesUseCase,
-        private val logoutUseCase: LogoutUseCase,
-        private val getUserUseCase: GetUserUseCase
+        private val getStoriesUseCase: GetStoriesUseCaseContract,
+        private val logoutUseCase: LogoutUseCaseContract,
+        private val getUserUseCase: GetUserUseCaseContract
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
