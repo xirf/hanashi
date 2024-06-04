@@ -27,6 +27,9 @@ class DetailActivity : AppCompatActivity() {
         intent.getStringExtra(EXTRA_STORY_ID)?.let {
             viewModel.getDetail(it)
         }
+        intent.getStringExtra(EXTRA_TITLE)?.let {
+            binding.tvDetailName.text = it
+        }
 
 
         val shimmer = Shimmer.AlphaHighlightBuilder()
@@ -73,5 +76,6 @@ class DetailActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_STORY_ID = "extra_story_id"
         const val EXTRA_IMAGE = "extra_image"
+        const val EXTRA_TITLE = "extra_title"
     }
 }

@@ -12,5 +12,5 @@ interface StoryRepositoryInterface {
     fun getStories(): Flow<PagingData<StoryResponse>>
     fun getStory(id: String): Flow<StoryDetailResponse>
     fun addStory(file: File, description: String): Flow<GeneralResponse>
-    fun getStoriesLocation(id: Int): Flow<StoryListResponse>
+    fun getStoriesWithLocation(): Flow<StoryListResponse>
 }

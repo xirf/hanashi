@@ -37,10 +37,8 @@ interface ApiService {
         @Query("size") size: Int
     ): StoryListResponse
 
-    @GET("stories")
-    suspend fun storiesWithLocation(
-        @Query("location") id: Int
-    ): StoryListResponse
+    @GET("stories?location=1")
+    suspend fun storiesWithLocation(): StoryListResponse
 
     @GET("stories/{id}")
     suspend fun getStoryDetail(

@@ -40,6 +40,7 @@ class StoryAdapter : PagingDataAdapter<StoryEntity, StoryAdapter.MyViewHolder>(D
                 root.setOnClickListener {
                     val intent = Intent(root.context, DetailActivity::class.java)
                     intent.putExtra(DetailActivity.EXTRA_STORY_ID, story.id)
+                    intent.putExtra(DetailActivity.EXTRA_TITLE, story.name)
                     intent.putExtra(DetailActivity.EXTRA_IMAGE, story.photoUrl)
 
                     it.context.startActivity(intent)

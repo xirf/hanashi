@@ -47,8 +47,8 @@ class StoryRepository(
         emit(apiService.addStory(body, description.toRequestBody("text/plain".toMediaType())))
     }.flowOn(Dispatchers.IO)
 
-    override fun getStoriesLocation(id: Int) = flow {
-        emit(apiService.storiesWithLocation(id))
+    override fun getStoriesWithLocation() = flow {
+        emit(apiService.storiesWithLocation())
     }.flowOn(Dispatchers.IO)
 
 }
