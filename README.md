@@ -1,7 +1,7 @@
 <h1 align="center">HANASHI</h1>
 
 <p align="center">
-Hanashi is an Android application developed in Kotlin and Java, using the Android Studio Iguana | 2023.2.1 Patch 2 IDE. The application uses Gradle for build automation.
+Hanashi is a mobile application that allows users to read and share story snippets. The app is built using Kotlin and uses dicoing's story API to fetch the stories. The app also uses Google Maps API to display the location of the stories.
 </p>
 
 ## Getting Started
