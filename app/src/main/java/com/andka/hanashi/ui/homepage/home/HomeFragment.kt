@@ -1,6 +1,5 @@
 package com.andka.hanashi.ui.homepage.home
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -31,9 +30,10 @@ class HomeFragment : Fragment() {
         runSetup()
 
         binding.swipeContainer.setOnRefreshListener {
-            adapter.refresh()
+            binding.swipeContainer.isRefreshing = false
+            // Disable because of problematic swipe refresh :)
+            // adapter.refresh()
         }
-        scrollToTop()
         binding.actionLogout.setOnClickListener {
             viewModel.logout()
             startActivity(Intent(requireContext(), LoginActivity::class.java))
@@ -45,7 +45,6 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.storyState.collect {
                 adapter.submitData(lifecycle, it.resultGetStory)
-                binding.swipeContainer.isRefreshing = false
                 binding.tvUsername.text = it.username
             }
         }
@@ -79,6 +78,10 @@ class HomeFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         viewModel.getStories()
+    }
+
+    override fun onPause() {
+        super.onPause()
     }
 
     override fun onResume() {

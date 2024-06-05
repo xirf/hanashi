@@ -29,7 +29,7 @@ class StoryRepository(
     private val storyRemoteMediator = StoryRemoteMediator(apiService, storyDatabase)
     override fun getStories(): Flow<PagingData<StoryResponse>> {
         return Pager(
-            config = PagingConfig(pageSize = 15),
+            config = PagingConfig(pageSize = 10),
             remoteMediator = storyRemoteMediator,
             pagingSourceFactory = {
                 storyDatabase.storyDao().getAllStories()

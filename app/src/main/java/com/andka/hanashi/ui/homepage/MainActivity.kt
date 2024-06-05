@@ -24,13 +24,10 @@ import com.andka.hanashi.ui.new_story.NewStoryActivity
 import com.andka.hanashi.utils.Locator
 import com.andka.hanashi.utils.ResultState
 
-// Constants
 private const val ANIMATION_DURATION = 500L
 
 @RequiresApi(Build.VERSION_CODES.S)
 class MainActivity : AppCompatActivity() {
-
-    // Properties
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val viewModel by viewModels<MainActivityViewModel>(factoryProducer = { Locator.mainActivityViewModelFactory })
 
