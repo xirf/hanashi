@@ -1,5 +1,7 @@
 package com.andka.hanashi.ui.homepage.home
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +12,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.andka.hanashi.R
 import com.andka.hanashi.databinding.FragmentHomeBinding
+import com.andka.hanashi.ui.homepage.MainActivity
+import com.andka.hanashi.ui.login.LoginActivity
 import com.andka.hanashi.utils.Locator
+import com.andka.hanashi.utils.SlideUpItemAnimator
 import kotlinx.coroutines.launch
 import java.util.Calendar
-
 
 class HomeFragment : Fragment() {
     private val binding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
@@ -28,6 +32,12 @@ class HomeFragment : Fragment() {
 
         binding.swipeContainer.setOnRefreshListener {
             adapter.refresh()
+        }
+        scrollToTop()
+        binding.actionLogout.setOnClickListener {
+            viewModel.logout()
+            startActivity(Intent(requireContext(), LoginActivity::class.java))
+            (activity as MainActivity).finish()
         }
     }
 
@@ -59,7 +69,11 @@ class HomeFragment : Fragment() {
             adapter.retry()
         })
         rvStory.recyclerView.layoutManager = GridLayoutManager(context, 2)
-//        rvStory.recyclerView.itemAnimator = SlideUpItemAnimator()
+        rvStory.recyclerView.itemAnimator = SlideUpItemAnimator()
+    }
+
+    private fun scrollToTop() {
+        rvStory.recyclerView.scrollToPosition(0)
     }
 
     override fun onStart() {

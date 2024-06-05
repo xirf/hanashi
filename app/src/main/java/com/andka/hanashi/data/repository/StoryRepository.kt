@@ -9,6 +9,7 @@ import com.andka.hanashi.data.source.database.StoryDatabase
 import com.andka.hanashi.data.source.remote.ApiService
 import com.andka.hanashi.data.source.remote.paging.StoryRemoteMediator
 import com.andka.hanashi.domain.interfaces.StoryRepositoryInterface
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -40,11 +41,16 @@ class StoryRepository(
         emit(apiService.getStoryDetail(id))
     }.flowOn(Dispatchers.IO)
 
-    override fun addStory(file: File, description: String) = flow {
+    override fun addStory(file: File, description: String, latLng: LatLng?) = flow {
         val body = MultipartBody.Part.createFormData(
             "photo", file.name, file.asRequestBody("image/jpeg".toMediaTypeOrNull())
         )
-        emit(apiService.addStory(body, description.toRequestBody("text/plain".toMediaType())))
+        emit(apiService.addStory(
+            body,
+            description.toRequestBody("text/plain".toMediaType()),
+            latLng?.latitude?.toFloat(),
+            latLng?.longitude?.toFloat(),
+        ))
     }.flowOn(Dispatchers.IO)
 
     override fun getStoriesWithLocation() = flow {

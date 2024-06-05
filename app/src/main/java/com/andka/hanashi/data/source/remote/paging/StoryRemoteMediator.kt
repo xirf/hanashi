@@ -20,10 +20,7 @@ class StoryRemoteMediator(
         state: PagingState<Int, StoryResponse>
     ): MediatorResult {
         val page = when (loadType) {
-            LoadType.REFRESH -> {
-                val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
-                remoteKeys?.nextKey?.minus(1) ?: 1
-            }
+            LoadType.REFRESH -> 1
 
             LoadType.PREPEND -> {
                 val remoteKeys = getRemoteKeyForFirstItem(state)

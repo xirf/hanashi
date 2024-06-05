@@ -10,9 +10,11 @@ coreSplashscreen = "1.0.1"
 coreTesting = "2.2.0"
 datastorePreferences = "1.1.1"
 espressoCore = "3.5.1"
+espressoIntents = "3.4.0"
+espressoIdlingResource = "3.4.0"
 fragmentKtx = "1.7.1"
 glide = "4.16.0"
-junit = "4.13.2"
+junit = "4.12"
 junitVersion = "1.1.5"
 kotlin = "1.9.0"
 kotlinxCoroutinesTest = "1.7.3"
@@ -47,6 +49,7 @@ androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", versi
 androidx-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTesting" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-espresso-idling-resource = { module = "androidx.test.espresso:espresso-idling-resource", version.ref = "espressoIdlingResource" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-lifecycle-extensions = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "lifecycleExtensions" }
@@ -61,6 +64,7 @@ androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "ro
 androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
 androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+espresso-intents = { module = "androidx.test.espresso:espresso-intents", version.ref = "espressoIntents" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }

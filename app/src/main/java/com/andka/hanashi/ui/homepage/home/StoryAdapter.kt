@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerDrawable
 
-class StoryAdapter : PagingDataAdapter<StoryEntity, StoryAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class StoryAdapter : PagingDataAdapter<StoryEntity, StoryAdapter.MyViewHolder>(itemDiffCallback) {
 
     class MyViewHolder(private val binding: StoryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -28,7 +28,6 @@ class StoryAdapter : PagingDataAdapter<StoryEntity, StoryAdapter.MyViewHolder>(D
                 .build()
             shimmerDrawable.setShimmer(shimmer)
             with(binding) {
-
                 tvItemName.text = story.name
                 tvItemDesc.text = story.description
                 tvCreatedAt.text = getTimelineUpload(root.context, story.createdAt)
@@ -57,20 +56,18 @@ class StoryAdapter : PagingDataAdapter<StoryEntity, StoryAdapter.MyViewHolder>(D
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-
-
         val binding = StoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<StoryEntity>() {
+        val itemDiffCallback = object : DiffUtil.ItemCallback<StoryEntity>() {
             override fun areItemsTheSame(oldItem: StoryEntity, newItem: StoryEntity): Boolean {
-                return oldItem == newItem
+                return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(oldItem: StoryEntity, newItem: StoryEntity): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem == newItem
             }
         }
     }

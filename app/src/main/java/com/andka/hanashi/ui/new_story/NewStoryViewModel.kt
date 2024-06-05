@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.andka.hanashi.domain.contract.NewStoryUseCaseContract
-import com.andka.hanashi.domain.usecase.NewStoryUseCase
 import com.andka.hanashi.utils.ResultState
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -23,8 +23,8 @@ class NewStoryViewModel(
     private val _newStoryState = MutableStateFlow(NewStoryViewState())
     val newStoryState = _newStoryState.asStateFlow()
 
-    fun newStory(file: File, description: String) {
-        newStoryUseCase(file, description).onEach { res ->
+    fun newStory(file: File, description: String, latLng: LatLng? = null) {
+        newStoryUseCase(file, description, latLng).onEach { res ->
             _newStoryState.update { it.copy(resultNewStory = res) }
         }.launchIn(viewModelScope)
     }

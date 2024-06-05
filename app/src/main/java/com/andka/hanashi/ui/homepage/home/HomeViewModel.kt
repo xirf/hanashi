@@ -10,6 +10,8 @@ import com.andka.hanashi.domain.contract.GetUserUseCaseContract
 import com.andka.hanashi.domain.contract.LogoutUseCaseContract
 import com.andka.hanashi.domain.entity.StoryEntity
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -25,13 +27,15 @@ class HomeViewModel(
     )
 
     private val _storyState = MutableStateFlow(HomeFragmentViewState())
-    val storyState = _storyState
+    val storyState: StateFlow<HomeFragmentViewState> = _storyState
 
     fun getStories() {
         viewModelScope.launch {
-            getStoriesUseCase().cachedIn(viewModelScope).collect { stories ->
-                _storyState.update { it.copy(resultGetStory = stories) }
-            }
+            getStoriesUseCase().cachedIn(viewModelScope)
+                .distinctUntilChanged()
+                .collect { stories ->
+                    _storyState.update { it.copy(resultGetStory = stories) }
+                }
         }
     }
 

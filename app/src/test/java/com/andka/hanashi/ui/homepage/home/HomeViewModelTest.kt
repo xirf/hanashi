@@ -62,7 +62,7 @@ class HomeViewModelTest {
         val data: PagingData<StoryResponse> = StoryPagingSource.snapshot(dummyStory)
         val homeViewModel = HomeViewModel(getStoriesUseCase, getLogoutUseCase, getUserUseCase)
         val differ = AsyncPagingDataDiffer(
-            diffCallback = StoryAdapter.DIFF_CALLBACK,
+            diffCallback = StoryAdapter.itemDiffCallback,
             updateCallback = noopListUpdateCallback,
             workerDispatcher = Dispatchers.Main
         )
@@ -81,7 +81,7 @@ class HomeViewModelTest {
         val data: PagingData<StoryEntity> = PagingData.empty()
         val storyViewModel = HomeViewModel(getStoriesUseCase, getLogoutUseCase, getUserUseCase)
         val differ = AsyncPagingDataDiffer(
-            diffCallback = StoryAdapter.DIFF_CALLBACK,
+            diffCallback = StoryAdapter.itemDiffCallback,
             updateCallback = noopListUpdateCallback,
             workerDispatcher = Dispatchers.Main,
         )
@@ -89,7 +89,6 @@ class HomeViewModelTest {
         storyViewModel.getStories()
         getStoriesUseCase.fakeDelegate.emit(data)
         differ.submitData(storyViewModel.storyState.value.resultGetStory)
-
         Assert.assertEquals(0, differ.snapshot().size)
     }
 

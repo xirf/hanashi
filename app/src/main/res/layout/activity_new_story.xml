@@ -65,6 +65,39 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/til_description">
 
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/location_loading"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:indeterminate="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/btn_location"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/btn_location"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/btn_location"
+            style="@style/Button.secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:button="@drawable/ic_terms_checkbox"
+            android:buttonTint="@color/primary"
+            android:contentDescription="@string/pick_location"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/btn_galery" />
+
         <ImageButton
             android:id="@+id/btn_galery"
             style="@style/Button.secondary"
@@ -75,9 +108,7 @@
             android:src="@drawable/ic_image_black_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@id/btn_camera"
-            app:tint="@color/primary"
-            tools:layout_conversion_absoluteHeight="43dp"
-            tools:layout_conversion_absoluteWidth="48dp" />
+            app:tint="@color/primary" />
 
         <ImageButton
             android:id="@+id/btn_camera"
@@ -88,9 +119,7 @@
             android:src="@drawable/ic_camera_black_24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btn_galery"
-            app:tint="@color/primary"
-            tools:layout_conversion_absoluteHeight="43dp"
-            tools:layout_conversion_absoluteWidth="48dp" />
+            app:tint="@color/primary" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
