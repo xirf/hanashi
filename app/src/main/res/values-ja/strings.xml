@@ -51,6 +51,10 @@
     <string name="change_language">言語を変更</string>
     <string name="logout">ログアウト</string>
     <string name="reason">" 理由: "</string>
+    <string name="menu_maps">マップ</string>
+    <string name="retry">もう一度試す</string>
+    <string name="pick_location">場所を選択</string>
+    <string name="unknown_location">不明な場所です。外に出てみてください</string>
     <string-array name="tod">
         <item>おはようございます</item>
         <item>こんにちは</item>

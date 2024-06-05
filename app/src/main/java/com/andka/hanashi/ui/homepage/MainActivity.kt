@@ -26,7 +26,6 @@ import com.andka.hanashi.utils.ResultState
 
 private const val ANIMATION_DURATION = 500L
 
-@RequiresApi(Build.VERSION_CODES.S)
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val viewModel by viewModels<MainActivityViewModel>(factoryProducer = { Locator.mainActivityViewModelFactory })
@@ -43,7 +42,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavigation() {
-        loadFragment(HomeFragment())
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment())
+            .commit()
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> {
@@ -67,9 +67,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container, fragment)
-        transaction.commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(fragment.tag)
+            .commit()
     }
 
     private fun setupSplashScreen() {
@@ -91,9 +92,13 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        setupSplashScreenExitAnimation()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            setupSplashScreenExitAnimation()
+        }
     }
 
+
+    @RequiresApi(Build.VERSION_CODES.S)
     private fun setupSplashScreenExitAnimation() {
         splashScreen.setOnExitAnimationListener { splashScreenView ->
             val slideUp = ObjectAnimator.ofFloat(

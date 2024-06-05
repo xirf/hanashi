@@ -14,10 +14,9 @@ import com.bumptech.glide.Glide
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerDrawable
 
-class StoryAdapter : PagingDataAdapter<StoryEntity, StoryAdapter.MyViewHolder>(itemDiffCallback) {
+class StoryAdapter : PagingDataAdapter<StoryEntity, StoryAdapter.ViewHolder>(itemDiffCallback) {
 
-    class MyViewHolder(private val binding: StoryItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: StoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
         private val shimmerDrawable = ShimmerDrawable()
         fun bind(story: StoryEntity) {
             val shimmer = Shimmer.AlphaHighlightBuilder()
@@ -31,6 +30,7 @@ class StoryAdapter : PagingDataAdapter<StoryEntity, StoryAdapter.MyViewHolder>(i
                 tvItemName.text = story.name
                 tvItemDesc.text = story.description
                 tvCreatedAt.text = getTimelineUpload(root.context, story.createdAt)
+
                 Glide.with(root)
                     .load(story.photoUrl)
                     .placeholder(shimmerDrawable)
@@ -48,16 +48,16 @@ class StoryAdapter : PagingDataAdapter<StoryEntity, StoryAdapter.MyViewHolder>(i
         }
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = getItem(position)
         if (data != null) {
             holder.bind(data)
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = StoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MyViewHolder(binding)
+        return ViewHolder(binding)
     }
 
     companion object {

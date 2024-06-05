@@ -31,8 +31,8 @@ class HomeViewModel(
 
     fun getStories() {
         viewModelScope.launch {
-            getStoriesUseCase().cachedIn(viewModelScope)
-                .distinctUntilChanged()
+            getStoriesUseCase()
+                .cachedIn(viewModelScope)
                 .collect { stories ->
                     _storyState.update { it.copy(resultGetStory = stories) }
                 }

@@ -58,4 +58,8 @@
         <item>Selamat Malam</item>
     </string-array>
     <string name="see_you_later">Sampai jumpa lagi</string>
+    <string name="menu_maps">peta</string>
+    <string name="retry">coba lagi</string>
+    <string name="pick_location">pilih lokasi</string>
+    <string name="unknown_location">lokasi gak ditemukan</string>
 </resources>

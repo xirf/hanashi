@@ -56,7 +56,7 @@
     <string name="retry">try again</string>
     <string name="pick_location">pick a location</string>
     <string name="unknown_location">unknown location, try go outside</string>
-    <string name="location_format">Lat: %1$.6f, Long: %2$.6f</string>
+    <string name="location_format" translatable="false">Lat: %1$.6f, Long: %2$.6f</string>
     <string-array name="tod">
         <item>Good Morning</item>
         <item>Good Afternoon</item>

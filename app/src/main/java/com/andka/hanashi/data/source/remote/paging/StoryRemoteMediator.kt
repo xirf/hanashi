@@ -21,8 +21,19 @@ class StoryRemoteMediator(
     ): MediatorResult {
         val page = when (loadType) {
             LoadType.REFRESH -> getRemoteKeyClosestToCurrentPosition(state)?.nextKey?.minus(1) ?: 1
-            LoadType.PREPEND -> getRemoteKeyForFirstItem(state)?.prevKey ?: return MediatorResult.Success(endOfPaginationReached = false)
-            LoadType.APPEND -> getRemoteKeyForLastItem(state)?.nextKey ?: return MediatorResult.Success(endOfPaginationReached = false)
+            LoadType.PREPEND -> {
+                val remoteKeys = getRemoteKeyForFirstItem(state)
+                val prevKey = remoteKeys?.prevKey
+                    ?: return MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
+                prevKey
+            }
+
+            LoadType.APPEND -> {
+                val remoteKeys = getRemoteKeyForLastItem(state)
+                val nextKey = remoteKeys?.nextKey
+                    ?: return MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
+                nextKey
+            }
         }
 
         return try {

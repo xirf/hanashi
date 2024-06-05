@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.andka.hanashi.R
 import com.andka.hanashi.databinding.FragmentHomeBinding
 import com.andka.hanashi.ui.homepage.MainActivity
@@ -19,21 +20,14 @@ import kotlinx.coroutines.launch
 import java.util.Calendar
 
 class HomeFragment : Fragment() {
+    private val adapter by lazy { StoryAdapter() }
     private val binding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
     private val viewModel by viewModels<HomeViewModel>(factoryProducer = { Locator.homeViewModelFactory })
-    private val rvStory by lazy { binding.rvStory }
-    private val adapter by lazy { StoryAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         renderRecyclerView()
         runSetup()
-
-        binding.swipeContainer.setOnRefreshListener {
-            binding.swipeContainer.isRefreshing = false
-            // Disable because of problematic swipe refresh :)
-            // adapter.refresh()
-        }
         binding.actionLogout.setOnClickListener {
             viewModel.logout()
             startActivity(Intent(requireContext(), LoginActivity::class.java))
@@ -64,29 +58,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun renderRecyclerView() {
-        rvStory.recyclerView.adapter = adapter.withLoadStateFooter(footer = LoadingAdapter {
+        binding.rvStory.adapter = adapter.withLoadStateFooter(footer = LoadingAdapter {
             adapter.retry()
         })
-        rvStory.recyclerView.layoutManager = GridLayoutManager(context, 2)
-        rvStory.recyclerView.itemAnimator = SlideUpItemAnimator()
-    }
-
-    private fun scrollToTop() {
-        rvStory.recyclerView.scrollToPosition(0)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.getStories()
-    }
-
-    override fun onPause() {
-        super.onPause()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.getUser()
+        binding.rvStory.layoutManager = GridLayoutManager(context, 2)
+        binding.rvStory.itemAnimator = SlideUpItemAnimator()
     }
 
     override fun onCreateView(
@@ -94,5 +70,11 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         return binding.root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.getUser()
+        viewModel.getStories()
     }
 }
