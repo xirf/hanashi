@@ -2,12 +2,12 @@ package com.andka.hanashi.ui.new_story
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -17,13 +17,11 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.andka.hanashi.R
 import com.andka.hanashi.databinding.ActivityNewStoryBinding
 import com.andka.hanashi.utils.*
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerDrawable
-import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.Dispatchers
@@ -240,8 +238,11 @@ class NewStoryActivity : AppCompatActivity() {
     private fun handleSuccess() {
         showLoading(false)
         showToast(this, getString(R.string.posted))
-        Log.d("NewStoryActivity", "handleSuccess: Sending broadcast")
-        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_ACTION))
+        val sharedPref = getSharedPreferences("story_pref", Context.MODE_PRIVATE)
+        with(sharedPref.edit()) {
+            putBoolean("NewStoryAdded", true)
+            apply()
+        }
         finish()
     }
 
@@ -263,7 +264,6 @@ class NewStoryActivity : AppCompatActivity() {
         private val PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val CODE_PERMISSIONS = 10
         private const val IMAGE_PATH_KEY = "image_path"
-        const val BROADCAST_ACTION = "com.andka.hanashi.NEW_STORY_ADDED"
     }
 
     enum class ImageStatus {
